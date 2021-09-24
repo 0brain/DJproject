@@ -6,5 +6,9 @@ def index(request):
     return HttpResponse("Сторінка women.")
 
 
-def categories(request):
-    return HttpResponse("<h1>Статті по категоріях</h1>")
+def categories(request, catid):
+    return HttpResponse(f"<h1>Статті по категоріях</h1><p>{catid}</p>")
+
+
+def archive(request, year):
+    return HttpResponse(f"<h1>Архів по рокам</h1>{year}</p>")
