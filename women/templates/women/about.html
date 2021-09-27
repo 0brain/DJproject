@@ -2,9 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Про сайт</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-<h1>Про сайт</h1>
+<h1>{{ title }}</h1>
+
+<ul>
+{% for m in menu %}
+<li>{{m}}</li>
+{% endfor %}
+</ul>
+
 </body>
 </html>
