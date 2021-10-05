@@ -3,26 +3,37 @@ from django.shortcuts import render, redirect
 
 from .models import *
 
-menu = ["Про сайт", "Додати статтю", "Зворотній зв'язок", "Увійти"]
+menu = [{'title': "Про сайт", 'url_name': 'about'},
+        {'title': "Додати статтю", 'url_name': 'add_page'},
+        {'title': "Зворотній зв'язок", 'url_name': 'contact'},
+        {'title': "Увійти", 'url_name': 'login'}
+]
 
 
 def index(request):
     posts = Women.objects.all()
-    return render(request, 'women/index.html', {'posts': posts, 'menu': menu, 'title': 'Головна сторінка'})
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'title': 'Головна сторінка'
+        }
+    return render(request, 'women/index.html', context=context)
 
 
 def about(request):
     return render(request, 'women/about.html', {'menu': menu, 'title': 'Про сайт'})
 
 
-def categories(request, catid):
-    return HttpResponse(f"<h1>Статті по категоріях</h1><p>{catid}</p>")
+def addpage(request):
+    return HttpResponse("Додавання статті")
 
 
-def archive(request, year):
-    if int(year) > 2021:
-        return redirect('home', permanent=True)
-    return HttpResponse(f"<h1>Архів по рокам</h1>{year}</p>")
+def contact(request):
+    return HttpResponse("Зворотній зв’язок")
+
+
+def login(request):
+    return HttpResponse("Авторизація")
 
 
 def pageNotFound(request, exception):
